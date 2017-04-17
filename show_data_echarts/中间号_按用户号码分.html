@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>中间号_按用户号码分</title>
+	<!-- 引入 echarts.js -->
+    <script src="js/echarts.js"></script>
+</head>
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+
+		var option = {
+		    tooltip: {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b}: {c} ({d}%)"
+		    },
+		    legend: {
+		        orient: 'vertical',
+		        x: 'left',
+		        data:['北京','天津','武汉','广州','其他']
+		    },
+		    title: {
+		        top: 10,
+		        text: '用户号码归属地比例',
+		        left: 'center',
+		        textStyle: {
+		            color: '#000'
+		        }
+		    },
+		    series: [
+		        {
+		            name:'用户号码归属地',
+		            type:'pie',
+		            radius: ['50%', '70%'],
+		            avoidLabelOverlap: false,
+		            label: {
+		                normal: {
+		                    show: false,
+		                    position: 'center'
+		                },
+		                emphasis: {
+		                    show: true,
+		                    textStyle: {
+		                        fontSize: '30',
+		                        fontWeight: 'bold'
+		                    }
+		                }
+		            },
+		            labelLine: {
+		                normal: {
+		                    show: false
+		                }
+		            },
+		            data:[
+		                {value:335, name:'天津'},
+		                {value:310, name:'武汉'},
+		                {value:234, name:'广州'},
+		                {value:135, name:'其他'},
+		                {value:1548, name:'北京'}
+		            ]
+		        }
+		    ]
+		};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>	
+</body>
+</html>

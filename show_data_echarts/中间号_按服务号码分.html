@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>中间号_按服务号码分</title>
+	<!-- 引入 echarts.js -->
+    <script src="js/echarts.js"></script>
+</head>
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        var schema = [
+		    {name: 'date', index: 0, text: '年'},
+		    {name: 'teletimes', index: 1, text: '话单数'},
+		    {name: 'telewholelength', index: 2, text: '通话时长'},
+		    {name: 'telehour', index: 3, text: '平均峰值时间'},
+		    {name: 'telehourtimes', index: 3, text: '峰值话务量'},
+		];
+        // 指定图表的配置项和数据
+        // [通话时长，话单数，平均峰值时间，峰值话务量，时间]
+
+		var data = [
+		    [[600,223,'9:00-10:00',6,'01045667788',2015],[500,178,'8:00-9:00',4,'01033227788',2015],[890,356,'13:30-14:30',8,'01045907788',2015],[680,168,'11:00-12:00',7,'01023457788',2015],[370,178,'9:00-10:00',5,'01056787788',2015],[260,105,'15:00-16:00',4,'01056786688',2015],[180,87,'16:00-17:00',5,'01034787788',2015],[600,180,'9:00-10:00',6,'01012787788',2015],[450,305,'15:00-16:00',9,'01056776688',2015],[120,45,'16:00-17:00',5,'01034227788',2015]]
+		];
+
+		var option = {
+		    backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+		        offset: 0,
+		        color: '#f7f8fa'
+		    }, {
+		        offset: 1,
+		        color: '#cdd0d5'
+		    }]),
+		    title: {
+		        text: '2015 年各服务号码总话单量与总通话时长',
+		        top:5,
+		        left: 'center'
+		    },
+		    legend: {
+		        right: 40,
+		        top:10,
+		        data: ['2015']
+		    },
+		    xAxis: {
+		        splitLine: {
+		            lineStyle: {
+		                type: 'dashed'
+		            }
+		        },
+		        type: 'value',
+	            name:'分钟',
+				nameLocation: 'end',
+		        nameGap: 10,
+		        nameTextStyle: {
+		            color: '#000',
+		            fontSize: 12
+		        },
+		    },
+		    yAxis: {
+		        splitLine: {
+		            lineStyle: {
+		                type: 'dashed'
+		            }
+		        },
+		        scale: true,
+		        type: 'value',
+	            name:'话单数',
+		        nameLocation: 'end',
+		        nameGap: 20,
+		        nameTextStyle: {
+		            color: '#000',
+		            fontSize: 12
+		        },
+		    },
+		     tooltip: {//提示信息
+		        padding: 10,
+		        backgroundColor: '#222',
+		        borderColor: '#777',
+		        borderWidth: 1,
+		        formatter: function (obj) {
+		            var value = obj.value;
+		            return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
+		                + obj.seriesName + ' '  + '年：'
+		                + value[4]
+		                + '</div>'
+		                + schema[1].text + '：' + value[1] + '次<br>'
+		                + schema[2].text + '：' + value[0] + '分钟<br>'
+		                + schema[3].text + '：' + value[2] + '<br>'
+		                + schema[4].text + '：' + value[3] + '次<br>';
+		        }
+		    },
+		    series: [ {
+		        name: '2015',
+		        data: data[0],
+		        type: 'scatter',
+		        symbolSize: function (data) {
+		            //return Math.sqrt(data[2]);
+		            return 6*data[3];
+		        },
+		        label: {
+		            emphasis: {
+		                show: true,
+		                formatter: function (param) {
+		                    return param.data[4];
+		                },
+		                position: 'top'
+		            }
+		        },
+		        itemStyle: {
+		            normal: {
+		                shadowBlur: 10,
+		                shadowColor: 'rgba(120, 36, 50, 0.5)',
+		                shadowOffsetY: 5,
+		                color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+		                    offset: 0,
+		                    color: 'rgb(251, 118, 123)'
+		                }, {
+		                    offset: 1,
+		                    color: 'rgb(204, 46, 72)'
+		                }])
+		            }
+		        }
+		    }]
+
+		};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>	
+</body>
+</html>

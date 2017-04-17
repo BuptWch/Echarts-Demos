@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>统一号_按区域细分</title>
+	<!-- 引入 echarts.js -->
+    <script src="js/echarts.js"></script>
+    <script src="js/xinjiang.js"></script>
+</head>
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="map" style="width: 800px;height:800px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('map'));
+
+	    myChart.setOption(option = {
+	    	title: {
+	            text: '新疆各区通话信息（2016）',
+	            top: 10,
+		        left: 'center',
+		        textStyle: {
+		            color: '#000'
+		        }
+	        },
+	        tooltip: {
+	            trigger: 'item',
+	            //formatter: '{b}<br/>{c} (p / km2)'
+	            formatter: '{b}<br/>'+'话单数：'+'{c}'
+	        },
+	        toolbox: {
+	            show: true,
+	            orient: 'vertical',
+	            left: 'right',
+	            top: 'center',
+	            feature: {
+	                dataView: {readOnly: false},
+	                restore: {},
+	                saveAsImage: {}
+	            }
+	        },
+	        visualMap: {
+	        	left: '5%',
+            	top: '20%',
+	            min: 800,
+	            max: 50000,
+	            text:['High','Low'],
+	            realtime: false,
+	            calculable: true,
+	            inRange: {
+	                color: ['lightskyblue','yellow', 'orangered']
+	            }
+	        },
+	        series: [{
+	        	name:'新疆各区通话信息',
+	            type: 'map',
+	            map: 'xinjiang',
+	            itemStyle:{
+                    normal:{label:{show:true}},
+                    emphasis:{label:{show:true}}
+                },
+                data:[
+                    {name: '乌鲁木齐市', value: 44045},
+                    {name: '克拉玛依市', value: 19172},
+                    {name: '吐鲁番市', value: 9172},
+                    {name: '塔城地区', value: 15477},
+                    {name: '博尔塔拉州', value: 1686},
+                    {name: '伊犁州', value: 6992},
+                    {name: '阿克苏地区', value: 14045},
+                    {name: '克孜勒苏州', value: 20689},
+                    {name: '喀什地区', value: 27659},
+                    {name: '和田地区', value: 35180},
+                    {name: '巴音郭楞州', value: 45204},                   
+                    {name: '阿勒泰地区', value: 14918},
+                    {name: '昌吉州', value: 5881},
+                    {name: '图木舒克市', value: 4178},
+                    {name: '阿拉尔市', value: 2227},
+                    {name: '双河市', value: 2180},
+                    {name: '铁门关市', value: 2180},
+                    {name: '五家渠市', value: 3368},
+                    {name: '北屯市', value: 806},
+                    {name: '可克达拉市', value: 898}
+                ],
+                 // 自定义名称映射
+                nameMap: {
+                    '乌鲁木齐市': '乌鲁木齐市',
+                    '克拉玛依市':'克拉玛依市',
+                    '吐鲁番市':'吐鲁番市',
+                    '塔城地区':'塔城地区', 
+                    '博尔塔拉蒙古自治州':'博尔塔拉州', 
+                    '伊犁哈萨克自治州':'伊犁州', 
+                    '阿克苏地区':'阿克苏地区', 
+                    '克孜勒苏柯尔克孜自治州':'克孜勒苏州', 
+                    '喀什地区':'喀什地区', 
+                    '和田地区':'和田地区', 
+                    '巴音郭楞蒙古自治州':'巴音郭楞州',                    
+                    '阿勒泰地区':'阿勒泰地区', 
+                    '昌吉回族自治州':'昌吉州', 
+                    '图木舒克市':'图木舒克市', 
+                    '阿拉尔市':'阿拉尔市', 
+                    '双河市':'双河市', 
+                    '铁门关市':'铁门关市',
+                    '五家渠市':'五家渠市', 
+                    '北屯市':'北屯市',
+                    '可克达拉市':'可克达拉市'
+                }
+	        }]
+	    });
+
+    </script>	
+</body>
+</html>
